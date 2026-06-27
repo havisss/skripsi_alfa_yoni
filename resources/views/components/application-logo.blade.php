@@ -1,0 +1,1 @@
+<span {{ $attributes->merge(['class' => 'tracking-widest', 'style' => "font-size: 4.5rem; letter-spacing: 0.05em; color: #161c20; font-family: 'Marcellus', serif; text-transform: lowercase;"]) }}>kevala</span>
