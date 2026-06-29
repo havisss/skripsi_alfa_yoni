@@ -119,14 +119,7 @@
                 </li>
                 @endif
 
-                @if(auth()->user()->hasPermission('users.index'))
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>System</span>
-                </h6>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}"><i class="bi bi-people"></i> User Management</a>
-                </li>
-                @endif
+
                 <hr>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}" class="d-flex justify-content-center w-100">
@@ -148,8 +141,23 @@
                         </button>
                         <span class="navbar-brand mb-0 h1 fw-bold">@yield('title')</span>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <span class="me-3 fw-medium">Hello, {{ Auth::user()->name }}</span>
+                    <div class="d-flex align-items-center dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color: #3d372e; font-weight: 500;">
+                            <span class="me-2">Hello, {{ Auth::user()->name }}</span>
+                            <i class="bi bi-person-circle fs-5"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="profileDropdown" style="background-color: #fcfbfa; border: 1px solid #e6e2d6 !important;">
+                            <li><a class="dropdown-item py-2" href="{{ route('profile.edit') }}"><i class="bi bi-person me-2"></i> Edit Profile</a></li>
+                            <li><hr class="dropdown-divider" style="border-color: #e6e2d6;"></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="m-0">
+                                    @csrf
+                                    <a class="dropdown-item py-2 text-danger" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>

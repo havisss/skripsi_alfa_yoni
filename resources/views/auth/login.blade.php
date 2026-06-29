@@ -5,8 +5,20 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <!-- Role -->
+        <div class="mb-4">
+            <x-input-label for="role" :value="__('Login As (Role)')" />
+            <select id="role" name="role" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="admin qc">Admin QC</option>
+                <option value="admin inventory">Admin Inventory</option>
+                <option value="manager">Manager</option>
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />

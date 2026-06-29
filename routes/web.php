@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('products', ProductController::class)->middleware('permission:products.index');
-    Route::resource('users', UserController::class)->except(['create', 'show', 'edit'])->middleware('permission:users.index');
+    // Route::resource('users', UserController::class)->except(['create', 'show', 'edit'])->middleware('permission:users.index');
 
     Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::get('/', [InventoryController::class, 'index'])->name('index')->middleware('permission:inventory.index');

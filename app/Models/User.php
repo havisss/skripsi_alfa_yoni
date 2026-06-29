@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'permissions',
+        'role',
     ];
 
     /**
@@ -56,6 +57,18 @@ class User extends Authenticatable
      */
     public function hasPermission(string $menu): bool
     {
+        if ($this->role === 'manager') {
+            return true;
+        }
+
+        if ($this->role === 'admin qc') {
+            return in_array($menu, ['qc.upload', 'qc.manual', 'qc.history']);
+        }
+
+        if ($this->role === 'admin inventory') {
+            return in_array($menu, ['products.index', 'inventory.index', 'inventory.mutations']);
+        }
+
         if (empty($this->permissions)) {
             return false;
         }
